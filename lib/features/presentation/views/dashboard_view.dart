@@ -1,3 +1,4 @@
+import 'package:e_commerce_dashboard/features/presentation/views/widgets/dashboard_view_body.dart';
 import 'package:flutter/material.dart';
 
 class DashboardView extends StatelessWidget {
@@ -5,6 +6,6 @@ class DashboardView extends StatelessWidget {
   static const routeName = 'dashboard';
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return const DashboardViewBody();
   }
 }
