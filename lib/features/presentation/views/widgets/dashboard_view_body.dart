@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:e_commerce_dashboard/core/widgets/custom_button.dart';
 import 'package:e_commerce_dashboard/core/widgets/custom_text_form_field.dart';
 import 'package:e_commerce_dashboard/features/presentation/views/widgets/image_picker_container.dart';
+import 'package:e_commerce_dashboard/features/presentation/views/widgets/is_featured_product.dart';
 import 'package:flutter/material.dart';
 
 class DashboardViewBody extends StatefulWidget {
@@ -17,7 +18,8 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late String productName, productDescription;
   late int productPrice, productCode;
-  late File? imageFile;
+   File? imageFile;
+  bool isFeatured = false;
 
   @override
   Widget build(BuildContext context) {
@@ -63,21 +65,40 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                   },
                 ),
                 const SizedBox(height: 16),
-                ImagePickerContainer(
-                  onImageSelected: (value) {
-                    imageFile = value;
-                    
+                IsFeaturedProduct(
+                  onChanged: (bool value) {
+                    setState(() {
+                      isFeatured = value;
+                    });
                   },
                 ),
                 const SizedBox(height: 16),
-                CustomButton(onPressed: () {
-                  if (formKey.currentState!.validate()) {
-                    formKey.currentState!.save();
-                    setState(() {
-                      autovalidateMode = AutovalidateMode.always;
-                    });
-                  }
-                }, title: 'Add Product'),
+                ImagePickerContainer(
+                  onImageSelected: (value) {
+                    imageFile = value;
+                  },
+                ),
+                const SizedBox(height: 16),
+                CustomButton(
+                  onPressed: () {
+                    if (formKey.currentState!.validate()) {
+                      if (imageFile != null) {
+                        formKey.currentState!.save();
+                        setState(() {
+                          autovalidateMode = AutovalidateMode.always;
+                        });
+                      }
+                      else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Please select an image'),
+                          ),
+                        );
+                      }
+                    }
+                  },
+                  title: 'Add Product',
+                ),
               ],
             ),
           ),

@@ -36,33 +36,7 @@ class _IsFeaturedProductState extends State<IsFeaturedProduct> {
             TextSpan(
               children: [
                 TextSpan(
-                  text: 'من خلال إنشاء حساب ، فإنك توافق على ',
-                  style: AppTextStyles.semiBold13.copyWith(
-                    color: AppColors.obacityGrayColor ,
-                  ),
-                ),
-                TextSpan(
-                  text: 'الشروط والأحكام',
-                  style: AppTextStyles.semiBold13.copyWith(
-                    color: AppColors.lightPrimaryColor,
-                  ),
-                ),
-                const TextSpan(
-                  text: ' ',
-                  style: AppTextStyles.semiBold13,
-                ),
-                TextSpan(
-                  text: 'الخاصة',
-                  style: AppTextStyles.semiBold13.copyWith(
-                    color: AppColors.lightPrimaryColor,
-                  ),
-                ),
-                const TextSpan(
-                  text: ' ',
-                  style: AppTextStyles.semiBold13,
-                ),
-                TextSpan(
-                  text: 'بنا',
+                  text: 'Is Featured Product',
                   style: AppTextStyles.semiBold13
                       .copyWith(color: AppColors.lightPrimaryColor),
                 ),
