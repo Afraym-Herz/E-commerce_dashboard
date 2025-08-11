@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:e_commerce_dashboard/core/widgets/custom_button.dart';
 import 'package:e_commerce_dashboard/core/widgets/custom_text_form_field.dart';
+import 'package:e_commerce_dashboard/core/widgets/show_snack_bar.dart';
 import 'package:e_commerce_dashboard/features/presentation/views/widgets/image_picker_container.dart';
 import 'package:e_commerce_dashboard/features/presentation/views/widgets/is_featured_product.dart';
 import 'package:flutter/material.dart';
@@ -16,9 +17,9 @@ class DashboardViewBody extends StatefulWidget {
 class _DashboardViewBodyState extends State<DashboardViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-  late String productName, productDescription;
-  late int productPrice, productCode;
-   File? imageFile;
+  late String productName, productDescription, productCode;
+  late int productPrice;
+  File? imageFile;
   bool isFeatured = false;
 
   @override
@@ -51,9 +52,8 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                 const SizedBox(height: 16),
                 CustomTextFormField(
                   title: 'Product Code',
-                  isNum: true,
                   onSaved: (value) {
-                    productCode = int.parse(value!);
+                    productCode = value!.toLowerCase();
                   },
                 ),
                 const SizedBox(height: 16),
@@ -81,20 +81,16 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                 const SizedBox(height: 16),
                 CustomButton(
                   onPressed: () {
-                    if (formKey.currentState!.validate()) {
-                      if (imageFile != null) {
+                    if (imageFile != null) {
+                      if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
+                      } else {
                         setState(() {
                           autovalidateMode = AutovalidateMode.always;
                         });
                       }
-                      else {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text('Please select an image'),
-                          ),
-                        );
-                      }
+                    } else {
+                      customSnackBar(context, message: 'must add image');
                     }
                   },
                   title: 'Add Product',
