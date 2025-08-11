@@ -6,7 +6,7 @@ A new Flutter project.
 
 ### doing list 
 
-1 - create form field contain ( name - price - product code - description - image - rate )
+1 - create form field contain ( name - price - product code - description - image )
 2 - pick image (install package use it when click on icon ) and convert it to file
 3 - show circular indicator until show image (package)
 4 - display image in the container after convert it as file 

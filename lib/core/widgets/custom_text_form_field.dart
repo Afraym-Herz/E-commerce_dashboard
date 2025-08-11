@@ -1,26 +1,28 @@
-
 import 'package:e_commerce_dashboard/core/utils/app_colors.dart';
 import 'package:e_commerce_dashboard/core/utils/app_text_styles.dart';
 import 'package:e_commerce_dashboard/features/presentation/views/widgets/build_outline_input_border.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  const CustomTextFormField({super.key, required this.title , this.isPhoneNum = false, this.onSaved});
+  const CustomTextFormField({super.key, required this.title , this.onSaved, this.maxLines = 1,  this.isNum = false });
   final String title;
-  final bool isPhoneNum;
   final void Function(String?)? onSaved ;
+  final bool isNum ;
+  final int maxLines ;
+  
 
   @override
   Widget build(BuildContext context) {
     return  TextFormField(
       validator: (value) {
         if (value == null || value.isEmpty) {
-          return 'يجب ادخال $title';
+          return 'must add $title';
         }
         return null;
       },
+      maxLines: maxLines,
       onSaved: onSaved,
-      keyboardType: isPhoneNum ? TextInputType.phone : TextInputType.text,
+      keyboardType: isNum ? TextInputType.number : TextInputType.text,
       decoration: InputDecoration(
         filled: true,
         fillColor: const Color(0xffF9FAFA),
