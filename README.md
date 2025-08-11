@@ -4,13 +4,11 @@ A new Flutter project.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### doing list 
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1 - create form field contain ( name - price - product code - description - image - rate )
+2 - pick image (install package use it when click on icon ) and convert it to file
+3 - show circular indicator until show image (package)
+4 - display image in the container after convert it as file 
+5 - add trash icon to delete photo and remove trash if not selected photo 
+6 - recive image in form 
