@@ -3,9 +3,13 @@ import 'dart:io';
 import 'package:e_commerce_dashboard/core/widgets/custom_button.dart';
 import 'package:e_commerce_dashboard/core/widgets/custom_text_form_field.dart';
 import 'package:e_commerce_dashboard/core/widgets/show_snack_bar.dart';
+import 'package:e_commerce_dashboard/features/domain/entities/add_product_input_entity.dart';
+import 'package:e_commerce_dashboard/features/presentation/manager/cubit/add_product_cubit.dart';
 import 'package:e_commerce_dashboard/features/presentation/views/widgets/image_picker_container.dart';
 import 'package:e_commerce_dashboard/features/presentation/views/widgets/is_featured_product.dart';
+import 'package:e_commerce_dashboard/features/presentation/views/widgets/is_organic_product.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardViewBody extends StatefulWidget {
   const DashboardViewBody({super.key});
@@ -21,6 +25,10 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
   late int productPrice;
   File? imageFile;
   bool isFeatured = false;
+  late int expiryMonths;
+  late bool isOrganic;
+  late int numOfCalories;
+  late num unitAmount;
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +66,30 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                 ),
                 const SizedBox(height: 16),
                 CustomTextFormField(
+                  title: 'Expiry Months',
+                  isNum: true,
+                  onSaved: (value) {
+                    expiryMonths = int.parse(value!);
+                  },
+                ),
+                const SizedBox(height: 16),
+                CustomTextFormField(
+                  title: 'Num of Calories',
+                  isNum: true,
+                  onSaved: (value) {
+                    numOfCalories = int.parse(value!);
+                  },
+                ),
+                const SizedBox(height: 16),
+                CustomTextFormField(
+                  title: 'Unit Amount',
+                  isNum: true,
+                  onSaved: (value) {
+                    unitAmount = int.parse(value!);
+                  },
+                ),
+                const SizedBox(height: 16),
+                CustomTextFormField(
                   title: 'Product Description',
                   maxLines: 5,
                   onSaved: (value) {
@@ -67,9 +99,13 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                 const SizedBox(height: 16),
                 IsFeaturedProduct(
                   onChanged: (bool value) {
-                    setState(() {
-                      isFeatured = value;
-                    });
+                    isFeatured = value;
+                  },
+                ),
+                const SizedBox(height: 16),
+                IsOrganicProduct(
+                  onChanged: (bool value) {
+                    isOrganic = value;
                   },
                 ),
                 const SizedBox(height: 16),
@@ -84,6 +120,20 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                     if (imageFile != null) {
                       if (formKey.currentState!.validate()) {
                         formKey.currentState!.save();
+                        context.read<AddProductCubit>().addProduct(
+                          addProductInputEntity: AddProductInputEntity(
+                            productCode: productCode,
+                            productDescription: productDescription,
+                            productImage: imageFile!,
+                            productName: productName,
+                            productPrice: productPrice,
+                            isFeatured: isFeatured,
+                            expiryMonths: expiryMonths,
+                            numOfCalories: numOfCalories,
+                            unitAmount: unitAmount,
+                            isOrganic: isOrganic,
+                          ),
+                        );
                       } else {
                         setState(() {
                           autovalidateMode = AutovalidateMode.always;
