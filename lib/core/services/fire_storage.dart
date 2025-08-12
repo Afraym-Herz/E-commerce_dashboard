@@ -14,7 +14,7 @@ class FireStorage implements StorageServices {
     String fileName = b.basename(file.path);
     String extenstion = b.extension(fileName);
 
-    Reference fileRef = storageRef.child('$path/$fileName.$extenstion');
+    var fileRef = storageRef.child('$path/$fileName.$extenstion');
     await fileRef.putFile(file);
 
     return await fileRef.getDownloadURL(); 
