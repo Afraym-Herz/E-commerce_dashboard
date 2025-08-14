@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'dart:math';
 
+import 'package:e_commerce_dashboard/features/data/models/review_model.dart';
 import 'package:e_commerce_dashboard/features/domain/entities/add_product_input_entity.dart';
 
 class AddProductInputModel {
@@ -16,6 +18,7 @@ class AddProductInputModel {
   final num avgRating;
   final num ratingCount;
   final num count;
+  final List<ReviewModel> reviews ;
 
   AddProductInputModel({
     required this.productName,
@@ -31,6 +34,7 @@ class AddProductInputModel {
     required this.avgRating,
     required this.ratingCount,
     required this.count,
+    required this.reviews ,
   });
 
   factory AddProductInputModel.fromEntity(
@@ -50,8 +54,10 @@ class AddProductInputModel {
       avgRating: addProductInputEntity.avgRating,
       ratingCount: addProductInputEntity.ratingCount,
       count: addProductInputEntity.unitAmount,
+      reviews: addProductInputEntity.reviews.map((e) => ReviewModel.fromEntity(e)).toList() ,
     );
   }
+
 
   toMap() {
     return {
@@ -66,7 +72,8 @@ class AddProductInputModel {
       'numOfCalories': numOfCalories,
       'avgRating': avgRating,
       'ratingCount': ratingCount,
-      'count': count
+      'count': count,
+      'reviews': reviews
     };
   }
 }

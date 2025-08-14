@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:e_commerce_dashboard/features/domain/entities/review_entity.dart';
+
 class AddProductInputEntity {
   final String productName;
   final String productCode;
@@ -14,7 +16,8 @@ class AddProductInputEntity {
   final num avgRating  ;
   final num ratingCount  ;
   final num unitAmount;
-  AddProductInputEntity({
+  final List<ReviewEntity> reviews ;
+  AddProductInputEntity( {
     required this.productName,
     required this.productCode,
     required this.productPrice,
@@ -28,5 +31,6 @@ class AddProductInputEntity {
      this.avgRating = 0 ,
      this.ratingCount = 0 ,
     required this.unitAmount,
+    required this.reviews,
   });
 }
