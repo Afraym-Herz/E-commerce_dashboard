@@ -131,7 +131,7 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
                             expiryMonths: expiryMonths,
                             numOfCalories: numOfCalories,
                             unitAmount: unitAmount,
-                            isOrganic: isOrganic,
+                            isOrganic: isOrganic, reviews: [],
                           ),
                         );
                       } else {
