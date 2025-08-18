@@ -31,15 +31,16 @@ bool isBucketCreated = false;
   @override
   Future<String> uploadFile({required String path, required File file}) async {
     String fileName = b.basename(file.path);
+    String filePath = '${path}/$fileName';
 
     final storageResponse = await supabaseClient.storage
         .from(kBucket)
-        .upload('$path/$fileName', file);
+        .upload(filePath, file);
 
     final String publicUrl = await Supabase.instance.client
   .storage
   .from(kBucket)
-  .getPublicUrl(storageResponse);
+  .getPublicUrl(filePath);
   return publicUrl;
   }
 }

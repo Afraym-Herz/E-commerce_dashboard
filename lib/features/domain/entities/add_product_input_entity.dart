@@ -16,7 +16,7 @@ class AddProductInputEntity {
   final num avgRating  ;
   final num ratingCount  ;
   final num unitAmount;
-  final List<ReviewEntity> reviews ;
+  final List<ReviewEntity>? reviews ;
   AddProductInputEntity( {
     required this.productName,
     required this.productCode,
@@ -31,6 +31,6 @@ class AddProductInputEntity {
      this.avgRating = 0 ,
      this.ratingCount = 0 ,
     required this.unitAmount,
-    required this.reviews,
+     this.reviews,
   });
 }

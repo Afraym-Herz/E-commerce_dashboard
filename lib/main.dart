@@ -12,7 +12,7 @@ Future<void> main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   ); 
    SupabaseStorage.initSupabase();
-   await SupabaseStorage.createSupabaseBucket( bucketName: 'fruits_images');
+   //await SupabaseStorage.createSupabaseBucket( bucketName: 'fruits_images');
   
   setupGetIt();
   runApp(const ECommerceDashboard());

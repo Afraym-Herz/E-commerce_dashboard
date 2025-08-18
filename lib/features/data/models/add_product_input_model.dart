@@ -18,7 +18,7 @@ class AddProductInputModel {
   final num avgRating;
   final num ratingCount;
   final num count;
-  final List<ReviewModel> reviews ;
+  final List<ReviewModel>? reviews ;
 
   AddProductInputModel({
     required this.productName,
@@ -34,7 +34,7 @@ class AddProductInputModel {
     required this.avgRating,
     required this.ratingCount,
     required this.count,
-    required this.reviews ,
+     this.reviews ,
   });
 
   factory AddProductInputModel.fromEntity(
@@ -54,7 +54,7 @@ class AddProductInputModel {
       avgRating: addProductInputEntity.avgRating,
       ratingCount: addProductInputEntity.ratingCount,
       count: addProductInputEntity.unitAmount,
-      reviews: addProductInputEntity.reviews.map((e) => ReviewModel.fromEntity(e)).toList() ,
+    //  reviews: addProductInputEntity.reviews.map((e) => ReviewModel.fromEntity(e)).toList() ,
     );
   }
 
@@ -73,7 +73,7 @@ class AddProductInputModel {
       'avgRating': avgRating,
       'ratingCount': ratingCount,
       'count': count,
-      'reviews': reviews
+    //  'reviews': reviews
     };
   }
 }
