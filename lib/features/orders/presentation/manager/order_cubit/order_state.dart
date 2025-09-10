@@ -3,4 +3,13 @@ part of 'order_cubit.dart';
 @immutable
 sealed class OrderState {}
 
-final class OrderInitial extends OrderState {}
+final class OrdersInitial extends OrderState {}
+
+final class OrdersLoading extends OrderState {}
+
+final class OrdersGetSuccess extends OrderState {}
+
+final class OrdersGetFailure extends OrderState {
+  final String message;
+  OrdersGetFailure({required this.message});
+}
