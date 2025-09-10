@@ -1,6 +1,6 @@
 import 'package:e_commerce_dashboard/core/utils/app_colors.dart';
 import 'package:e_commerce_dashboard/core/utils/app_text_styles.dart';
-import 'package:e_commerce_dashboard/features/presentation/views/widgets/custom_check_box.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/views/widgets/custom_check_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -36,7 +36,7 @@ class _IsOrganicProductState extends State<IsOrganicProduct> {
             TextSpan(
               children: [
                 TextSpan(
-                  text: 'Is Featured Product',
+                  text: 'Is Organic Product',
                   style: AppTextStyles.semiBold13
                       .copyWith(color: AppColors.lightPrimaryColor),
                 ),

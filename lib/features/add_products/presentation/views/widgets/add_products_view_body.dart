@@ -3,22 +3,22 @@ import 'dart:io';
 import 'package:e_commerce_dashboard/core/widgets/custom_button.dart';
 import 'package:e_commerce_dashboard/core/widgets/custom_text_form_field.dart';
 import 'package:e_commerce_dashboard/core/widgets/show_snack_bar.dart';
-import 'package:e_commerce_dashboard/features/domain/entities/add_product_input_entity.dart';
-import 'package:e_commerce_dashboard/features/presentation/manager/cubit/add_product_cubit.dart';
-import 'package:e_commerce_dashboard/features/presentation/views/widgets/image_picker_container.dart';
-import 'package:e_commerce_dashboard/features/presentation/views/widgets/is_featured_product.dart';
-import 'package:e_commerce_dashboard/features/presentation/views/widgets/is_organic_product.dart';
+import 'package:e_commerce_dashboard/features/add_products/domain/entities/add_product_input_entity.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/manager/cubit/add_product_cubit.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/views/widgets/image_picker_container.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/views/widgets/is_featured_product.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/views/widgets/is_organic_product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DashboardViewBody extends StatefulWidget {
-  const DashboardViewBody({super.key});
+class AddProductsViewBody extends StatefulWidget {
+  const AddProductsViewBody({super.key});
 
   @override
-  State<DashboardViewBody> createState() => _DashboardViewBodyState();
+  State<AddProductsViewBody> createState() => _AddProductsViewBodyState();
 }
 
-class _DashboardViewBodyState extends State<DashboardViewBody> {
+class _AddProductsViewBodyState extends State<AddProductsViewBody> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   late String productName, productDescription, productCode;
@@ -26,7 +26,7 @@ class _DashboardViewBodyState extends State<DashboardViewBody> {
   File? imageFile;
   bool isFeatured = false;
   late int expiryMonths;
-  late bool isOrganic;
+   bool isOrganic = true;
   late int numOfCalories;
   late num unitAmount;
 

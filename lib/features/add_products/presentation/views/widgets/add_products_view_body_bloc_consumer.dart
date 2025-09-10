@@ -1,11 +1,11 @@
-import 'package:e_commerce_dashboard/features/presentation/manager/cubit/add_product_cubit.dart';
-import 'package:e_commerce_dashboard/features/presentation/views/widgets/custom_progress_hud.dart';
-import 'package:e_commerce_dashboard/features/presentation/views/widgets/dashboard_view_body.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/manager/cubit/add_product_cubit.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/views/widgets/custom_progress_hud.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/views/widgets/add_products_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class DashboardViewBodyBlocConsumer extends StatelessWidget {
-  const DashboardViewBodyBlocConsumer({super.key});
+class AddProductsViewBodyBlocConsumer extends StatelessWidget {
+  const AddProductsViewBodyBlocConsumer({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +25,7 @@ class DashboardViewBodyBlocConsumer extends StatelessWidget {
       builder: (context, state) {
         return CustomProgressHud(
           isLoading: state is AddProductLoading,
-          child: const DashboardViewBody(),
+          child: const AddProductsViewBody(),
         );
       },
     );

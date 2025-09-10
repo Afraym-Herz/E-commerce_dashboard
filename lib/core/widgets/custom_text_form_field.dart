@@ -1,6 +1,6 @@
 import 'package:e_commerce_dashboard/core/utils/app_colors.dart';
 import 'package:e_commerce_dashboard/core/utils/app_text_styles.dart';
-import 'package:e_commerce_dashboard/features/presentation/views/widgets/build_outline_input_border.dart';
+import 'package:e_commerce_dashboard/features/add_products/presentation/views/widgets/build_outline_input_border.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {

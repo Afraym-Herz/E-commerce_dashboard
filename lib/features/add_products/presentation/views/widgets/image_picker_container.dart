@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:e_commerce_dashboard/core/helper_functions/show_snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -61,7 +62,12 @@ class _ImagePickerContainerState extends State<ImagePickerContainer> {
     try {
       final ImagePicker picker = ImagePicker();
       final XFile? image = await picker.pickImage(source: ImageSource.gallery);
-      imageFile = File(image!.path);
+      if (image == null) {
+        customSnackBar(context, message: 'No image selected');
+  
+} else {
+        imageFile = File(image.path);
+      }
 
       widget.onImageSelected(imageFile);
     } on Exception catch (e) {

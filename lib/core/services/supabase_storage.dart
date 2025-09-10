@@ -6,23 +6,21 @@ import 'package:path/path.dart' as b;
 
 class SupabaseStorage implements StorageServices {
   SupabaseClient supabaseClient = SupabaseClient(kUrl, kApiKey);
-  
-  static createSupabaseBucket({required String bucketName}) async {
-    var buckets = await Supabase.instance.client.storage.listBuckets();
-bool isBucketCreated = false;
-    for (var bucket in buckets) {
-      if (bucket.name == bucketName) {
-        isBucketCreated = true;
-        break;
-      }
-    }
-    if (!isBucketCreated) {
-  final String bucketId = await Supabase.instance.client.storage.createBucket(
-    bucketName,
-  );
-  
-}
-  }
+
+  // static createSupabaseBucket({required String bucketName}) async {
+  //   var buckets = await Supabase.instance.client.storage.listBuckets();
+  //   bool isBucketCreated = false;
+  //   for (var bucket in buckets) {
+  //     if (bucket.name == bucketName) {
+  //       isBucketCreated = true;
+  //       break;
+  //     }
+  //   }
+  //   // if (!isBucketCreated) {
+  //   //   final String bucketId = await Supabase.instance.client.storage
+  //   //       .createBucket(bucketName);
+  //   // }
+  // }
 
   static void initSupabase() async {
     await Supabase.initialize(url: kUrl, anonKey: kApiKey);
@@ -37,10 +35,9 @@ bool isBucketCreated = false;
         .from(kBucket)
         .upload(filePath, file);
 
-    final String publicUrl = await Supabase.instance.client
-  .storage
-  .from(kBucket)
-  .getPublicUrl(filePath);
-  return publicUrl;
+    final String publicUrl = await Supabase.instance.client.storage
+        .from(kBucket)
+        .getPublicUrl(filePath);
+    return publicUrl;
   }
 }

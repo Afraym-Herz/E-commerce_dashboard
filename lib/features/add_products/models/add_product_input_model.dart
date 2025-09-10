@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:e_commerce_dashboard/features/data/models/review_model.dart';
-import 'package:e_commerce_dashboard/features/domain/entities/add_product_input_entity.dart';
+import 'package:e_commerce_dashboard/features/add_products/models/review_model.dart';
+import 'package:e_commerce_dashboard/features/add_products/domain/entities/add_product_input_entity.dart';
 
 class AddProductInputModel {
   final String productName;
