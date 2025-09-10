@@ -27,10 +27,23 @@ class FirestoreServices implements DatabaseServices {
     }
     return user.data()!;
   }
-  
+
   @override
   Future<bool> checkDataExists({required String path, required String userId}) {
-    var data = firestore.collection(path).doc(userId).get() ;
+    var data = firestore.collection(path).doc(userId).get();
     return data.then((value) => value.exists);
+  }
+
+  @override
+  Future<Map<String, dynamic>> getDataWithOrder({
+    required String path,
+    required String userId,
+    required String orderBy,
+  }) async {
+    var orderList = await firestore.collection(path).orderBy(orderBy).get();
+    if (orderList.docs.isNotEmpty) {
+      throw Exception('order document list not found for ID: $userId');
+    }
+    return orderList.docs.first.data();
   }
 }

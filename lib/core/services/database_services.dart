@@ -4,6 +4,9 @@ abstract class DatabaseServices {
 
   Future<Map<String , dynamic>> getData({required String path , required String userId});
 
+  Future<Map<String , dynamic>> getDataWithOrder({required String path , required String userId , required String orderBy});
+
   Future<bool> checkDataExists({required String path , required String userId});
+
 
 }
