@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'dart:math';
 
-import 'package:e_commerce_dashboard/features/add_products/models/review_model.dart';
+import 'package:e_commerce_dashboard/features/add_products/data/models/review_model.dart';
 import 'package:e_commerce_dashboard/features/add_products/domain/entities/add_product_input_entity.dart';
 
 class AddProductInputModel {

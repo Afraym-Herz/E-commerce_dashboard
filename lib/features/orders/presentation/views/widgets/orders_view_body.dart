@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
-class OrdersView extends StatelessWidget {
-  const OrdersView({super.key});
-
-  static const routeName = 'orders';
+class OrdersViewBody extends StatelessWidget {
+  const OrdersViewBody({super.key});
 
   @override
   Widget build(BuildContext context) {
