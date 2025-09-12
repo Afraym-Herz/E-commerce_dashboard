@@ -3,7 +3,7 @@ import 'package:e_commerce_dashboard/features/orders/domain/entities/shipping_ad
 class ShippingAddressModel {
   String? name;
   String? phone;
-  String? address;
+  String? addressDetails;
   String? city;
   String? email;
   String? floor;
@@ -11,7 +11,7 @@ class ShippingAddressModel {
   ShippingAddressModel({
     this.name,
     this.phone,
-    this.address,
+    this.addressDetails,
     this.floor,
     this.city,
     this.email,
@@ -20,7 +20,7 @@ class ShippingAddressModel {
   ShippingAddressModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     phone = json['phone'];
-    address = json['address'];
+    addressDetails = json['addressDetails'];
     floor = json['floor'];
     city = json['city'];
     email = json['email'];
@@ -30,7 +30,7 @@ class ShippingAddressModel {
     return ShippingAddressEntity(
       name: name,
       phone: phone,
-      address: address,
+      addressDetails: addressDetails,
       floor: floor,
       city: city,
       email: email,
@@ -42,7 +42,7 @@ class ShippingAddressModel {
     return {
       'name': name,
       'phone': phone,
-      'address': address,
+      'addressDetails': addressDetails,
       'floor': floor,
       'city': city,
       'email': email,

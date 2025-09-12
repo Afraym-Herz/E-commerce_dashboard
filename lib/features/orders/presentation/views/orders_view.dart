@@ -8,6 +8,11 @@ class OrdersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const OrdersViewBody();
+    return   Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Orders'),
+      ),
+      body: const OrdersViewBody());
   }
 }

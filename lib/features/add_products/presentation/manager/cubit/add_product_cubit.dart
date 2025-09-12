@@ -1,7 +1,5 @@
 import 'package:e_commerce_dashboard/core/repos/image_repo/image_repo.dart';
 import 'package:e_commerce_dashboard/core/repos/product_repo/product_repo.dart';
-import 'package:e_commerce_dashboard/core/services/get_it_services.dart';
-import 'package:e_commerce_dashboard/core/services/storage_services.dart';
 import 'package:e_commerce_dashboard/features/add_products/domain/entities/add_product_input_entity.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';

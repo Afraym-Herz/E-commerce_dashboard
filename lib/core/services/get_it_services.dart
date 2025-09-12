@@ -7,6 +7,8 @@ import 'package:e_commerce_dashboard/core/services/database_services.dart';
 import 'package:e_commerce_dashboard/core/services/firestore_services.dart';
 import 'package:e_commerce_dashboard/core/services/storage_services.dart';
 import 'package:e_commerce_dashboard/core/services/supabase_storage.dart';
+import 'package:e_commerce_dashboard/features/orders/data/repos/orders_repo_impl.dart';
+import 'package:e_commerce_dashboard/features/orders/domain/repos/orders_repo.dart';
 import 'package:get_it/get_it.dart';
 
   final getIt = GetIt.instance;
@@ -17,5 +19,6 @@ import 'package:get_it/get_it.dart';
     getIt.registerSingleton<ImageRepo>(ImageRepoImpl(storageServices: getIt.get<StorageServices>())) ;
     getIt.registerSingleton<DatabaseServices>(FirestoreServices()); 
     getIt.registerSingleton<ProductRepo>(ProductRepoImpl(databaseServices: getIt.get<DatabaseServices>()));
+    getIt.registerSingleton<OrdersRepo>(OrdersRepoImpl(databaseServices: getIt.get<DatabaseServices>()));
     
   }

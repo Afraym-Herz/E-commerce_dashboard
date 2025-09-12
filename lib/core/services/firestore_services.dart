@@ -41,7 +41,7 @@ class FirestoreServices implements DatabaseServices {
     required String orderBy,
   }) async {
     var orderList = await firestore.collection(path).orderBy(orderBy).get();
-    if (orderList.docs.isNotEmpty) {
+    if (orderList.docs.isEmpty) {
       throw Exception('order document list not found for ID: $userId');
     }
     return orderList.docs.first.data();

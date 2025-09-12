@@ -4,9 +4,10 @@ import 'package:e_commerce_dashboard/features/orders/domain/entities/order_entit
 
 abstract class OrdersRepo {
 
-  Future<Either<Failures, OrderEntity>> getOrders({
+  Future<Either<Failures,OrderEntity>> getOrdersWithOrder({
     required String path,
     required String userId,
     required String orderBy,
   });
+  
 }

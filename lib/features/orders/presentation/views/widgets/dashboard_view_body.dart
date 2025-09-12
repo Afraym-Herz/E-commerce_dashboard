@@ -1,7 +1,9 @@
 import 'package:e_commerce_dashboard/core/widgets/custom_button.dart';
 import 'package:e_commerce_dashboard/features/add_products/presentation/views/add_products_view.dart';
+import 'package:e_commerce_dashboard/features/orders/presentation/manager/order_cubit/order_cubit.dart';
 import 'package:e_commerce_dashboard/features/orders/presentation/views/orders_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DashboardViewBody extends StatelessWidget {
   const DashboardViewBody({

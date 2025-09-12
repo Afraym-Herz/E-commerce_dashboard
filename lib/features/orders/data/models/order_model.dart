@@ -1,3 +1,4 @@
+import 'package:e_commerce_dashboard/core/enums/order_enums.dart';
 import 'package:e_commerce_dashboard/features/orders/data/models/order_product_model.dart';
 import 'package:e_commerce_dashboard/features/orders/data/models/shipping_address_model.dart';
 import 'package:e_commerce_dashboard/features/orders/domain/entities/order_entity.dart';
@@ -8,8 +9,9 @@ class OrderModel {
   final ShippingAddressModel shippingAddressModel;
   final List<OrderProductModel> orderProducts;
   final String paymentMethod;
-  final String? status;
-  final String orderID;
+  final String date;
+  final String status;
+  final String orderId;
 
   OrderModel({
     required this.totalPrice,
@@ -17,13 +19,14 @@ class OrderModel {
     required this.shippingAddressModel,
     required this.orderProducts,
     required this.paymentMethod,
+    required this.date,
     required this.status,
-    required this.orderID,
+    required this.orderId,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
     totalPrice: json['totalPrice'].toDouble(),
-    uId: json['uId'],
+    uId: json['uID'],
     shippingAddressModel: ShippingAddressModel.fromJson(
       json['shippingAddressModel'],
     ),
@@ -31,18 +34,22 @@ class OrderModel {
       json['orderProducts'].map((e) => OrderProductModel.fromJson(e)),
     ),
     paymentMethod: json['paymentMethod'],
+    date: json['date'],
     status: json['status'],
-    orderID: json['orderID'],
+    orderId: json['orderId'],
   );
+
+
 
   OrderEntity toEntity () => OrderEntity(
     totalPrice: totalPrice,
     uId: uId,
-    shippingAddressModel: shippingAddressModel.toEntity(),
+    shippingAddressEntity: shippingAddressModel.toEntity(),
     orderProducts: orderProducts.map((e) => e.toEntity()).toList(),
     paymentMethod: paymentMethod,
-    status: status,
-    orderID: orderID,
+    date: date,
+    status: OrderStatusEnum.pending ,
+    orderId: orderId,
   );
 
   toJson() => {
@@ -51,7 +58,7 @@ class OrderModel {
     'shippingAddressModel': shippingAddressModel.toJson(),
     'orderProducts': orderProducts.map((e) => e.toJson()).toList(),
     'paymentMethod': paymentMethod,
+    'date': date,
     'status': status,
-    'orderID': orderID,
   };
 }

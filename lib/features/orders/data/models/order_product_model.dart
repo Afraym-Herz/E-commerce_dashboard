@@ -1,46 +1,48 @@
+import 'package:e_commerce_dashboard/features/orders/domain/entities/order_product_entity.dart';
+
 class OrderProductModel {
-  final String name;
-  final String code;
+  final String productName;
+  final String productCode;
   final String imageUrl;
-  final double price;
-  final int quantity;
+  final double productPrice;
+  final int count;
 
   OrderProductModel({
-    required this.name,
-    required this.code,
+    required this.productName,
+    required this.productCode,
     required this.imageUrl,
-    required this.price,
-    required this.quantity,
+    required this.productPrice,
+    required this.count,
   });
 
   factory OrderProductModel.fromJson(Map<String, dynamic> json) {
     return OrderProductModel(
-      name: json['name'],
-      code: json['code'],
+      productName: json['productName'],
+      productCode: json['productCode'],
       imageUrl: json['imageUrl'],
-      price: json['price'],
-      quantity: json['quantity'],
+      productPrice: json['productPrice'].toDouble(),
+      count: json['count'],
     );
   }
 
-  OrderProductModel toEntity()  {
-    return OrderProductModel(
-      name: name,
-      code: code,
+  OrderProductEntity toEntity()  {
+    return OrderProductEntity(
+      productName: productName,
+      productCode: productCode,
       imageUrl: imageUrl,
-      price: price,
-      quantity: quantity,
+      productPrice: productPrice,
+      count: count,
     );
   }
 
 
   toJson() {
     return {
-      'name': name,
-      'code': code,
+      'productName': productName,
+      'productCode': productCode,
       'imageUrl': imageUrl,
-      'price': price,
-      'quantity': quantity,
+      'productPrice': productPrice,
+      'count': count,
     };
   }
 

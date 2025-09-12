@@ -11,7 +11,7 @@ class OrdersRepoImpl implements OrdersRepo {
   OrdersRepoImpl({required this.databaseServices});
 
   @override
-  Future<Either<Failures, OrderEntity>> getOrders({
+  Future<Either<Failures,OrderEntity>> getOrdersWithOrder({
     required String path,
     required String userId,
     required String orderBy,
@@ -22,8 +22,8 @@ class OrdersRepoImpl implements OrdersRepo {
         userId: userId,
         orderBy: orderBy,
       );
-      var result = OrderModel.fromJson(json);
-      return Right(result.toEntity());
+      var result = OrderModel.fromJson(json).toEntity();
+      return Right(result);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
