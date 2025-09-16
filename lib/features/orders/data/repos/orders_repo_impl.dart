@@ -1,6 +1,8 @@
 import 'package:dartz/dartz.dart';
+import 'package:e_commerce_dashboard/core/enums/order_status_enums.dart';
 import 'package:e_commerce_dashboard/core/errors/failures.dart';
 import 'package:e_commerce_dashboard/core/services/database_services.dart';
+import 'package:e_commerce_dashboard/core/utils/backend_endpoints.dart';
 import 'package:e_commerce_dashboard/features/orders/data/models/order_model.dart';
 import 'package:e_commerce_dashboard/features/orders/domain/entities/order_entity.dart';
 import 'package:e_commerce_dashboard/features/orders/domain/repos/orders_repo.dart';
@@ -11,21 +13,26 @@ class OrdersRepoImpl implements OrdersRepo {
   OrdersRepoImpl({required this.databaseServices});
 
   @override
-  Future<Either<Failures,OrderEntity>> getOrdersWithOrder({
-    required String path,
-    required String userId,
-    required String orderBy,
-  }) async {
+  Stream<Either<Failures, List<OrderEntity>>> getOrdersWithOrder() async* {
     try {
-      var json = await databaseServices.getDataWithOrder(
-        path: path,
-        userId: userId,
-        orderBy: orderBy,
-      );
-      var result = OrderModel.fromJson(json).toEntity();
-      return Right(result);
+      await for (var (data as List<Map<String, dynamic>>)
+          in databaseServices.getStreamData(path: BackendEndpoints.orders)) {
+        List<OrderEntity> orders = (data as List<dynamic>)
+            .map<OrderEntity>((e) => OrderModel.fromJson(e).toEntity())
+            .toList();
+        yield Right(orders);
+      }
     } catch (e) {
-      return Left(ServerFailure(e.toString()));
+      yield Left(ServerFailure(e.toString()));
     }
+  }
+
+  @override
+  Future<Either<Failures, void>> updateOrderStatus({
+    required OrderStatusEnum status,
+    required String orderId,
+  }) {
+    // TODO: implement updateOrderStatus
+    throw UnimplementedError();
   }
 }

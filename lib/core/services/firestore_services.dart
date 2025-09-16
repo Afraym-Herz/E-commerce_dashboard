@@ -53,29 +53,29 @@ class FirestoreServices implements DatabaseServices {
     }
   }
 
-
   @override
-  Stream getStreamData({required String path, Map<String, dynamic>? query}) async* {
+  Stream getStreamData({
+    required String path,
+    Map<String, dynamic>? query,
+  }) async* {
     Query<Map<String, dynamic>> data = firestore.collection(path);
-      if (query != null) {
-        if (query['orderBy'] != null) {
-          var orderBy = query['orderBy'];
-          var descending = query['descending'];
-          data = data.orderBy(orderBy, descending: descending);
-        }
-
-        if (query['limit'] != null) {
-          var limit = query['limit'];
-          data = data.limit(limit);
-        }
+    if (query != null) {
+      if (query['orderBy'] != null) {
+        var orderBy = query['orderBy'];
+        var descending = query['descending'];
+        data = data.orderBy(orderBy, descending: descending);
       }
 
-        await for (var snapshot in data.snapshots()) {
-          yield snapshot.docs.map((e) => e.data()).toList();
-        }
-      
-  }
+      if (query['limit'] != null) {
+        var limit = query['limit'];
+        data = data.limit(limit);
+      }
+    }
 
+    await for (var snapshot in data.snapshots()) {
+      yield snapshot.docs.map((e) => e.data()).toList();
+    }
+  }
 
   @override
   Future<bool> checkDataExists({required String path, required String userId}) {
@@ -84,15 +84,21 @@ class FirestoreServices implements DatabaseServices {
   }
 
   @override
-  Future<Map<String, dynamic>> getDataWithOrder({
-    required String path,
-  }) async {
+  Future<Map<String, dynamic>> getDataWithOrder({required String path}) async {
     var orderList = await firestore.collection(path).get();
     if (orderList.docs.isEmpty) {
       throw Exception('order document list not found');
     }
     return orderList.docs.first.data();
   }
-  
-  
+
+  @override
+  Future<void> updateData({
+    required String path,
+    required Map<String, dynamic> data,
+    required String documentId,
+  }) async {
+    
+    await firestore.collection(path).doc(documentId).update(data);
+  }
 }
