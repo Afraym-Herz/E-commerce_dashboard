@@ -1,4 +1,4 @@
-import 'package:e_commerce_dashboard/core/enums/order_enums.dart';
+import 'package:e_commerce_dashboard/core/enums/order_status_enums.dart';
 import 'package:e_commerce_dashboard/features/orders/domain/entities/order_entity.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +26,6 @@ class OrderItem extends StatelessWidget {
                   ),
                 ),
                 const Spacer(),
-                // Order Status
                 Container(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
@@ -52,14 +51,12 @@ class OrderItem extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // User ID
             Text(
               'User ID: ${orderEntity.uId}',
               style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
             const SizedBox(height: 8),
 
-            // Shipping Address
             const Text(
               'Shipping Address:',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -70,14 +67,12 @@ class OrderItem extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // Payment Method
             Text(
               'Payment Method: ${orderEntity.paymentMethod}',
               style: const TextStyle(fontSize: 14, color: Colors.grey),
             ),
             const SizedBox(height: 16),
 
-            // Order Products
             const Text(
               'Products:',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
@@ -89,10 +84,11 @@ class OrderItem extends StatelessWidget {
               itemBuilder: (context, index) {
                 final product = orderEntity.orderProducts[index];
                 return ListTile(
-                  leading:const SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator()),
+                  leading: SizedBox(
+                        width: 60,
+                        height: 60,
+                        child: Image.network(orderEntity.orderProducts[index].imageUrl )
+                        ),
                   title: Text(product.productName),
                   subtitle: Text(
                     'Quantity: ${product.count} | Price: \$${product.productPrice.toStringAsFixed(2)}',
@@ -105,11 +101,11 @@ class OrderItem extends StatelessWidget {
                 );
               },
             ),
-
-            const SizedBox(height: 16),
+            const SizedBox(height: 12),
           ],
         ),
       ),
     );
   }
 }
+
