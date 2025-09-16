@@ -1,8 +1,10 @@
 import 'package:e_commerce_dashboard/core/services/get_it_services.dart';
 import 'package:e_commerce_dashboard/features/orders/domain/repos/orders_repo.dart';
 import 'package:e_commerce_dashboard/features/orders/presentation/manager/order_cubit/order_cubit.dart';
+import 'package:e_commerce_dashboard/features/orders/presentation/manager/update_order/update_order_cubit.dart';
 import 'package:e_commerce_dashboard/features/orders/presentation/views/widgets/orders_view_bloc_consumer.dart';
 import 'package:e_commerce_dashboard/features/orders/presentation/views/widgets/orders_view_body.dart';
+import 'package:e_commerce_dashboard/features/orders/presentation/views/widgets/update_order_bloc_consumer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,11 +15,15 @@ class OrdersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => OrderCubit(getIt.get<OrdersRepo>()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => OrderCubit(getIt.get<OrdersRepo>())),
+        BlocProvider(create: (context) => UpdateOrderCubit(getIt.get<OrdersRepo>())),
+      ],
+      
       child: Scaffold(
         appBar: AppBar(centerTitle: true, title: const Text('Orders')),
-        body: const OrderViewBlocConsumer(),
+        body: const UpdateOrderBlocConsumer(child: OrderViewBlocConsumer()),
       ),
     );
   }
