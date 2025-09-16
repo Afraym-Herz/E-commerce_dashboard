@@ -17,16 +17,65 @@ class FirestoreServices implements DatabaseServices {
   }
 
   @override
-  Future<Map<String, dynamic>> getData({
+  Future<Object> getData({
     required String path,
-    required String userId,
+    String? docId,
+    Map<String, dynamic>? query,
   }) async {
-    var user = await firestore.collection(path).doc(userId).get();
-    if (!user.exists || user.data() == null) {
-      throw Exception('User document not found for ID: $userId');
+    if (docId != null) {
+      var data = await firestore.collection(path).doc(docId).get();
+
+      if (!data.exists || data.data() == null) {
+        throw Exception('Document not found for ID: $docId');
+      }
+
+      return data.data()!;
+    } else {
+      Query<Map<String, dynamic>> data = await firestore.collection(path);
+      if (query != null) {
+        if (query['orderBy'] != null) {
+          var orderBy = query['orderBy'];
+          var descending = query['descending'];
+          data = data.orderBy(orderBy, descending: descending);
+        }
+
+        if (query['limit'] != null) {
+          var limit = query['limit'];
+          data = data.limit(limit);
+        }
+
+        var result = await data.get();
+        return result.docs.map((e) => e.data()).toList();
+      } else {
+        var result = await data.get();
+        return result.docs.map((e) => e.data()).toList();
+      }
     }
-    return user.data()!;
   }
+
+
+  @override
+  Stream getStreamData({required String path, Map<String, dynamic>? query}) async* {
+    Query<Map<String, dynamic>> data = firestore.collection(path);
+      if (query != null) {
+        if (query['orderBy'] != null) {
+          var orderBy = query['orderBy'];
+          var descending = query['descending'];
+          data = data.orderBy(orderBy, descending: descending);
+        }
+
+        if (query['limit'] != null) {
+          var limit = query['limit'];
+          data = data.limit(limit);
+        }
+      }
+
+        await for (var snapshot in data.snapshots()) {
+          yield snapshot.docs.map((e) => e.data()).toList();
+        }
+      
+  }
+
 
   @override
   Future<bool> checkDataExists({required String path, required String userId}) {
@@ -37,13 +86,13 @@ class FirestoreServices implements DatabaseServices {
   @override
   Future<Map<String, dynamic>> getDataWithOrder({
     required String path,
-    required String userId,
-    required String orderBy,
   }) async {
-    var orderList = await firestore.collection(path).orderBy(orderBy).get();
+    var orderList = await firestore.collection(path).get();
     if (orderList.docs.isEmpty) {
-      throw Exception('order document list not found for ID: $userId');
+      throw Exception('order document list not found');
     }
     return orderList.docs.first.data();
   }
+  
+  
 }
